@@ -1,64 +1,98 @@
-// app/[[...slug]]/page.tsx
-import { notFound } from "next/navigation";
-import { SliceZone } from "@prismicio/react";
+import { generateMetaTags } from "@/core/lib/generateMetaData";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { SliceZone } from "@prismicio/react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { WebPage, WithContext } from "schema-dts";
 
-type Params = { params?: { slug?: string[] } };
+type Params = {
+	params: Promise<{
+		slug: string[];
+	}>;
+};
 
-export default async function Page({ params }: Params) {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+	const resolvedParams = await params;
+	const { slug } = resolvedParams;
+	const uid = slug ? slug.join("_") : "home";
 	const client = createClient();
-	const slugParts = params?.slug ?? [];
-	const isHome = slugParts.length === 0;
 
-	// If your homepage is a singleton, prefer:
-	// const doc = await client.getSingle("homepage");
-	// Otherwise, use the "page" type with UID "home".
-	let doc = null;
+	const page = await client.getByUID("page", uid).catch((err) => {
+		console.error("Error fetching metadata:", err);
+		return null;
+	});
 
-	if (isHome) {
-		// Try homepage singleton first, fall back to page/home
-		doc =
-			(await client.getSingle("homepage").catch(() => null)) ??
-			(await client.getByUID("page", "home").catch(() => null));
-	} else {
-		// You said your UIDs use "_" between parts
-		const uid = slugParts.join("_");
-		doc = await client.getByUID("page", uid).catch(() => null);
-	}
+	const MetaData: Metadata = generateMetaTags({
+		title: page?.data.meta_title ?? page?.data.meta_title ?? "",
+		description: page?.data.meta_description ?? "Default Description",
+		keywords: page?.data.meta_description ?? "",
+		authors: "Aboco Derma",
+		url: `${process.env.NEXT_PUBLIC_BASE_URL}/${slug?.join("/")}`,
+		ogImage: page?.data.meta_image?.url ?? "",
+		altImage: page?.data.meta_image?.alt ?? "",
+	});
 
-	if (!doc) return notFound();
-
-	return <SliceZone slices={doc.data.slices} components={components} />;
+	return MetaData;
 }
 
-// (optional) SEO
-export async function generateMetadata({ params }: Params) {
+export default async function Page({ params }: Params) {
+	const resolvedParams = await params;
+	const { slug } = resolvedParams;
+	const uid = slug ? slug.join("_") : "home";
+
 	const client = createClient();
-	const slugParts = params?.slug ?? [];
-	const isHome = slugParts.length === 0;
 
-	let doc =
-		isHome
-			? (await client.getSingle("homepage").catch(() => null)) ??
-			(await client.getByUID("page", "home").catch(() => null))
-			: await client
-				.getByUID("page", slugParts.join("_"))
-				.catch(() => null);
+	try {
+		const page = await client.getByUID("page", uid);
 
-	const title = doc?.data?.meta_title ?? (isHome ? "Home" : slugParts.join(" · "));
-	const description = doc?.data?.meta_description ?? "Default Description";
+		const jsonLd: WithContext<WebPage> = {
+			"@context": "https://schema.org",
+			"@type": "WebPage",
+			"@id": uid,
+			about: page.data.meta_title ?? undefined,
+			abstract: page.data.meta_description ?? undefined,
+			accessMode: ["textual", "visual"],
+			alternativeHeadline: page.data.meta_title ?? undefined,
+			author: "Abaco Derma",
+			creator: "Abaco Derma",
+			datePublished: page.first_publication_date,
+			dateModified: page.last_publication_date,
+			dateCreated: page.first_publication_date,
+			image: page?.data.meta_image?.url ?? undefined,
+			inLanguage: "Icelandic",
+			isAccessibleForFree: true,
+			publisher: "Abaco Derma",
+			thumbnailUrl: page?.data.meta_image?.url ?? undefined,
+			text: page.data.meta_description ?? undefined,
+			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${slug ? slug.join("/") : ""}`,
+			description: page.data.meta_description ?? undefined,
+		};
 
-	return {
-		title,
-		description,
-		openGraph: {
-			title,
-			description,
-			images: doc?.data?.meta_image?.url ? [doc.data.meta_image.url] : [],
-			url:
-				process.env.NEXT_PUBLIC_BASE_URL +
-				(isHome ? "" : `/${slugParts.join("/")}`),
-		},
-	};
+		// console.log(page.data.slices);
+
+		return (
+			<>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				/>
+
+				<SliceZone slices={page.data.slices} components={components} />
+			</>
+		);
+	} catch (err) {
+		console.error(err);
+		notFound();
+	}
+}
+
+export async function generateStaticParams() {
+	const client = createClient();
+
+	const pages = await client.getAllByType("page");
+
+	return pages.map((page) => ({
+		slug: page.uid.split("_"),
+	}));
 }
