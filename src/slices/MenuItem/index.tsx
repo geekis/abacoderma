@@ -1,5 +1,5 @@
 // src/slices/MenuItem/index.tsx
-import { Content, isFilled } from "@prismicio/client";
+import { Content, isFilled, type LinkField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
 import { createClient } from "@/prismicio";
@@ -8,29 +8,32 @@ export type MenuItemProps = SliceComponentProps<Content.MenuItemSlice>;
 
 type Linkish = {
     label?: string | null;
-    link?: any;
     item_label?: string | null;
-    item_link?: any;
     title?: string | null;
-    url?: any;
+    link?: LinkField | null;
+    item_link?: LinkField | null;
+    url?: LinkField | null;
 };
 
 function pickLabel(it: Linkish) {
     return it.item_label ?? it.label ?? it.title ?? "Untitled";
 }
-function pickLinkField(it: Linkish) {
-    return it.item_link ?? it.link ?? it.url ?? null;
+function pickLinkField(it: Linkish): LinkField | null {
+    return (it.item_link ?? it.link ?? it.url ?? null) as LinkField | null;
 }
 
 export default async function MenuItem({ slice }: MenuItemProps) {
     const client = createClient();
 
-    // withSubMenu: fetch linked doc and normalize items
-    if (
-        slice.variation === "withSubMenu" &&
-        isFilled.contentRelationship(slice.primary.sub_menu)
-    ) {
-        const subMenuDoc = await client.getByID(slice.primary.sub_menu.id);
+    if (slice.variation === "withSubMenu") {
+        // Only fetch if the relationship is filled
+        const rel = slice.primary.sub_menu;
+        if (!isFilled.contentRelationship(rel)) {
+            // No submenu selected: render just the parent label
+            return <span className="text-lg">{slice.primary.label ?? "Untitled"}</span>;
+        }
+
+        const subMenuDoc = await client.getByID(rel.id);
         const data: any = subMenuDoc?.data ?? {};
         let items: any[] = [];
 
@@ -39,39 +42,21 @@ export default async function MenuItem({ slice }: MenuItemProps) {
         else if (Array.isArray(data.links)) items = data.links;
         else if (Array.isArray(data.slices)) {
             items = data.slices
-                .filter(
-                    (s: any) =>
-                        s.slice_type === "submenu_item" ||
-                        s.slice_type === "link" ||
-                        s.primary
-                )
+                .filter((s: any) => s?.primary || s?.slice_type === "submenu_item" || s?.slice_type === "link")
                 .map((s: any) => s.primary ?? s);
         }
 
         const hasItems = items.length > 0;
 
         return (
-            /**
-             * Use a "group relative" wrapper so the absolutely-positioned mega-menu
-             * can anchor to this element. Hover/focus on the label (peer) opens the menu.
-             */
-            <div className="group  text-lg">
-                {/* Trigger (label) */}
-                <div
-                    className="inline-flex items-center gap-2"
-                    aria-haspopup="menu"
-                    aria-expanded="false"
-                >
-                    {/* Make the label focusable for keyboard users */}
-                    <span
-                        tabIndex={0}
-                        className="peer cursor-pointer text-[#984C4B] outline-none hover:text-[#7f3f3e] focus-visible:ring-2 focus-visible:ring-rose-300 rounded-sm"
-                    >
-            {slice.primary.label}
-          </span>
-                </div>
+            <div className="group text-lg">
+        <span
+            tabIndex={0}
+            className="peer cursor-pointer text-[#984C4B] outline-none hover:text-[#7f3f3e] focus-visible:ring-2 focus-visible:ring-rose-300 rounded-sm"
+        >
+          {slice.primary.label ?? "Untitled"}
+        </span>
 
-                {/* Mega menu: hidden by default; shown on hover/focus of trigger or any part of the group */}
                 <ul
                     role="menu"
                     className={[
@@ -79,7 +64,6 @@ export default async function MenuItem({ slice }: MenuItemProps) {
                         "mega-menu absolute inset-x-0 z-50 pt-8 w-full min-w-full left-0 right-0",
                         "rounded-2xl border border-gray-300 bg-gray-100 p-8 shadow-2xl",
                         "normal-case font-normal text-sm",
-                        // visibility controls
                         "hidden opacity-0 translate-y-2 pointer-events-none",
                         "group-hover:block group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto",
                         "group-focus-within:block group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto",
@@ -90,26 +74,15 @@ export default async function MenuItem({ slice }: MenuItemProps) {
                     ].join(" ")}
                 >
                     {!hasItems ? (
-                        <li className="px-3 py-2 text-gray-500">
-                            No items
-                            <pre className="mt-2 max-h-48 w-[28rem] overflow-auto text-gray-600">
-                {JSON.stringify(Object.keys(data || {}), null, 2)}
-              </pre>
-                        </li>
+                        <li className="px-3 py-2 text-gray-500">No items</li>
                     ) : (
-                        <div
-                            className="
-                grid grid-cols-1 gap-2
-                sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-              "
-                        >
+                        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             {items.map((it, i) => {
-                                const linkField = pickLinkField(it);
-                                const label = pickLabel(it);
-
+                                const linkField = pickLinkField(it as Linkish);
+                                const label = pickLabel(it as Linkish);
                                 return (
                                     <li key={i} role="none" className="list-none">
-                                        {isFilled.link(linkField) ? (
+                                        {linkField && isFilled.link(linkField) ? (
                                             <PrismicNextLink
                                                 field={linkField}
                                                 role="menuitem"
@@ -118,9 +91,7 @@ export default async function MenuItem({ slice }: MenuItemProps) {
                                                 {label}
                                             </PrismicNextLink>
                                         ) : (
-                                            <span className="block rounded-lg px-3 py-2 text-gray-500">
-                        {label}
-                      </span>
+                                            <span className="block rounded-lg px-3 py-2 text-gray-500">{label}</span>
                                         )}
                                     </li>
                                 );
@@ -131,16 +102,17 @@ export default async function MenuItem({ slice }: MenuItemProps) {
             </div>
         );
     }
-    // default: single link
+
+    // "default" variation (here TS now knows .link exists on primary)
+    const { label, link } = slice.primary;
     return (
         <div className="text-lg">
-            {isFilled.link(slice.primary.link) ? (
-
-                <PrismicNextLink field={slice.primary.link} className="inline-block">
-                    {slice.primary.link.text}
+            {isFilled.link(link) ? (
+                <PrismicNextLink field={link} className="inline-block">
+                    {label ?? "Untitled"}
                 </PrismicNextLink>
             ) : (
-                <span>{slice.primary.label}</span>
+                <span>{label ?? "Untitled"}</span>
             )}
         </div>
     );
