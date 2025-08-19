@@ -1,0 +1,48 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"label": {
+				"__TYPE__": "FieldContent",
+				"value": "six",
+				"type": "Text"
+			},
+			"link": {
+				"key": "2160bdc8-93da-48d3-9899-08e13bb198e8",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "sky"
+				}
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "withSubMenu",
+		"primary": {
+			"label": {
+				"__TYPE__": "FieldContent",
+				"value": "magnet",
+				"type": "Text"
+			},
+			"sub_menu": {
+				"__TYPE__": "LinkContent",
+				"key": "fc8ad36e-2dac-442d-ac12-fc9f6f5268df",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

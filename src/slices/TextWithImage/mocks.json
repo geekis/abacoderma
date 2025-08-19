@@ -1,0 +1,87 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "came",
+				"type": "Text"
+			},
+			"paragraph": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ad et occaecat qui elit culpa. Qui laborum deserunt nostrud aute sint esse do in esse ad reprehenderit laboris laborum laborum. Ad proident do pariatur quis commodo fugiat amet cupidatat do."
+						}
+					}
+				]
+			},
+			"cta_text": {
+				"__TYPE__": "FieldContent",
+				"value": "cold",
+				"type": "Text"
+			},
+			"cta_link": {
+				"key": "cf41ae53-24ef-431b-8d76-6069cbce7c37",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "alone"
+				}
+			},
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+					"width": 3024,
+					"height": 3778
+				},
+				"url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a",
+				"width": 3024,
+				"height": 3778,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"credits": null,
+				"alt": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"image_position": {
+				"__TYPE__": "FieldContent",
+				"value": "right",
+				"type": "Select"
+			},
+			"margin_top": {
+				"__TYPE__": "FieldContent",
+				"value": "large",
+				"type": "Select"
+			},
+			"margin_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "medium",
+				"type": "Select"
+			},
+			"padding_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

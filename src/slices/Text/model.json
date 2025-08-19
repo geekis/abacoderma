@@ -1,0 +1,84 @@
+{
+  "id": "text",
+  "type": "SharedSlice",
+  "name": "Text",
+  "description": "Text",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "paragraph": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Paragraph",
+            "placeholder": "Paragraph",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "margin_top": {
+          "type": "Select",
+          "config": {
+            "label": "Margin Top",
+            "placeholder": "Margin Top",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "margin_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Margin Bottom",
+            "placeholder": "Margin Bottom",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_top": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Top",
+            "placeholder": "Padding Top",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Bottom",
+            "placeholder": "Padding Bottom",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

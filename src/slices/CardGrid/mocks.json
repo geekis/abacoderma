@@ -1,0 +1,185 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "mighty",
+				"type": "Text"
+			},
+			"cards": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "rather",
+									"type": "Text"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "54ad79d2-4f36-466e-8d61-83e12efdaadf",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "enjoy"
+									}
+								}
+							],
+							[
+								"paragraph",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Non in ipsum elit amet ea ullamco esse aute laborum nostrud minim commodo Lorem. Nostrud ea amet voluptate ipsum."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"margin_top": {
+				"__TYPE__": "FieldContent",
+				"value": "medium",
+				"type": "Select"
+			},
+			"margin_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "gridStaff",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "forest",
+				"type": "Text"
+			},
+			"cards": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "hole",
+									"type": "Text"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "3db32344-8b9b-4128-a90f-0b63b518daca",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "manner"
+									}
+								}
+							],
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1",
+										"width": 5616,
+										"height": 3744
+									},
+									"url": "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1",
+									"width": 5616,
+									"height": 3744,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"paragraph",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Occaecat dolor culpa est anim eu laboris. Aliqua est enim dolor pariatur aliquip cupidatat anim commodo culpa est qui. Ullamco nisi minim occaecat ad veniam adipisicing mollit reprehenderit pariatur reprehenderit velit velit occaecat veniam."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"margin_top": {
+				"__TYPE__": "FieldContent",
+				"value": "medium",
+				"type": "Select"
+			},
+			"margin_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

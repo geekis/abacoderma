@@ -1,0 +1,236 @@
+{
+  "id": "card_grid",
+  "type": "SharedSlice",
+  "name": "CardGrid",
+  "description": "CardGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "cards": {
+          "type": "Group",
+          "config": {
+            "label": "Cards",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Paragraph",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading3,strong,em,list-item,hyperlink,paragraph"
+                }
+              }
+            }
+          }
+        },
+        "margin_top": {
+          "type": "Select",
+          "config": {
+            "label": "Margin top",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "margin_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Margin Bottom",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_top": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Top",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Bottom",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "gridStaff",
+      "name": "Grid - Staff",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "cards": {
+          "type": "Group",
+          "config": {
+            "label": "Cards",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Paragraph",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading3,strong,em,hyperlink,embed,list-item,paragraph"
+                }
+              }
+            }
+          }
+        },
+        "margin_top": {
+          "type": "Select",
+          "config": {
+            "label": "Margin top",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "margin_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Margin Bottom",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_top": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Top",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        },
+        "padding_bottom": {
+          "type": "Select",
+          "config": {
+            "label": "Padding Bottom",
+            "placeholder": "",
+            "options": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"paragraph": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "In veniam et non officia sunt occaecat pariatur sit esse consequat. Elit id quis reprehenderit ullamco id dolor mollit commodo magna in minim. Veniam aute qui officia."
+						}
+					}
+				]
+			},
+			"margin_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"margin_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "small",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

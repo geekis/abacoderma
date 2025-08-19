@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fffbfb;
   --foreground: #171717;
 }
 
@@ -12,15 +12,90 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .flex-cc {
+    @apply flex items-center justify-center;
+  }
+  .flex-cs {
+    @apply flex items-start justify-center;
+  }
+  .flex-ce {
+    @apply flex items-end justify-center;
+  }
+
+  .flex-bc {
+    @apply flex items-center justify-between;
+  }
+  .flex-bs {
+    @apply flex items-start justify-between;
+  }
+  .flex-be {
+    @apply flex items-end justify-between;
+  }
+
+  .flex-sc {
+    @apply flex items-center justify-start;
+  }
+  .flex-ss {
+    @apply flex items-start justify-start;
+  }
+  .flex-se {
+    @apply flex items-end justify-start;
+  }
+
+  .flex-ec {
+    @apply flex items-center justify-end;
+  }
+  .flex-es {
+    @apply flex items-start justify-end;
+  }
+  .flex-ee {
+    @apply flex items-end justify-end;
+  }
+
+  .flex-vc {
+    @apply flex items-center justify-evenly;
+  }
+  .flex-vs {
+    @apply flex items-start justify-evenly;
+  }
+  .flex-ve {
+    @apply flex items-end justify-evenly;
+  }
+
+  .flex-ac {
+    @apply flex items-center justify-around;
+  }
+  .flex-as {
+    @apply flex items-start justify-around;
+  }
+  .flex-ae {
+    @apply flex items-end justify-around;
+  }
+
+  .col {
+    @apply flex-col;
+  }
+
+  .full {
+    @apply h-full w-full;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
