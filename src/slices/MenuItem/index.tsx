@@ -106,9 +106,9 @@ export default async function MenuItem({ slice }: MenuItemProps) {
     // "default" variation (here TS now knows .link exists on primary)
     const { label, link } = slice.primary;
     return (
-        <div className="text-lg">
+        <div>
             {isFilled.link(link) ? (
-                <PrismicNextLink field={link} className="inline-block">
+                <PrismicNextLink field={link} className="cursor-pointer text-xl font-medium font-serif text-[#53454A] outline-none hover:text-[#7f3f3e]">
                     {label ?? "Untitled"}
                 </PrismicNextLink>
             ) : (

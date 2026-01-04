@@ -43,7 +43,7 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 						<SliceZone slices={headerSlices} components={components}/>
 					</div>
 					<div className="flex gap-4 items-center">
-						<a className="text-gray-800 text-lg hover:text-gray-600" href="#">Hafa
+						<a className="text-gray-800 text-lg hover:text-gray-600" href="mailto:abacoderma@abacoderma.is">Hafa
 							samband</a>
 						<a href="#"
 						   className="py-2 px-6 text-lg border text-slate-50 bg-[#53484c] border-[#53484c] rounded-3xl">Bóka</a>

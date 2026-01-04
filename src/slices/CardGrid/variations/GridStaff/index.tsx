@@ -29,8 +29,8 @@ const CardGridStaff = ({
         <h3 className="text-4xl font-serif font-semibold mt-2 mb-8 text-[#53484c]">
           {slice.primary.title}
         </h3>
-        <div className="container max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-full">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-full">
               {slice.primary.cards.map((item, index) => {
                   const cardClasses =
                       "flex gap-4 no-underline items-center border border-solid border-transparent p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow";
