@@ -45,7 +45,7 @@ const TextWithImage = ({ slice }: TextWithImageProps): JSX.Element => {
             )}
         >
           <div className="flex-1 space-y-6">
-            <h2 className="text-[32px] md:text-[40px] font-bold mt-0 mb-6">
+            <h2 className="text-[32px] md:text-[36px] font-bold font-serif mt-0 mb-6">
               {slice.primary.title}
             </h2>
             <div className=" ">

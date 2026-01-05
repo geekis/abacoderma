@@ -5,12 +5,12 @@ interface ParagraphNodeWithDir {
 	direction?: "rtl" | "ltr";
 }
 export const prismicRichTextDefaults: JSXMapSerializer = {
-	heading1: ({ children }) => <h1 className="text-4xl font-bold mt-4 mb-3">{children}</h1>,
-	heading2: ({ children }) => <h2 className="text-3xl font-semibold mt-4 mb-3">{children}</h2>,
-	heading3: ({ children }) => <h3 className="text-2xl font-semibold mt-3 mb-2">{children}</h3>,
-	heading4: ({ children }) => <h4 className="text-xl font-semibold mt-3 mb-2">{children}</h4>,
-	heading5: ({ children }) => <h5 className="text-xl font-semibold mt-3 mb-2">{children}</h5>,
-	heading6: ({ children }) => <h6 className="text-xl font-semibold mt-3 mb-2">{children}</h6>,
+	heading1: ({ children }) => <h1 className="text-4xl font-serif font-bold mt-4 mb-3">{children}</h1>,
+	heading2: ({ children }) => <h2 className="text-3xl font-serif font-semibold mt-4 mb-3">{children}</h2>,
+	heading3: ({ children }) => <h3 className="text-2xl font-serif font-semibold mt-3 mb-2">{children}</h3>,
+	heading4: ({ children }) => <h4 className="text-xl font-serif font-semibold mt-3 mb-2">{children}</h4>,
+	heading5: ({ children }) => <h5 className="text-xl font-serif font-semibold mt-3 mb-2">{children}</h5>,
+	heading6: ({ children }) => <h6 className="text-xl font-serif font-semibold mt-3 mb-2">{children}</h6>,
 	paragraph: ({ node, children }) => {
 		const dir = (node as ParagraphNodeWithDir).direction || "auto";
 		return (

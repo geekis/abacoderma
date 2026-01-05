@@ -43,7 +43,7 @@ const CardGridStaff = ({
                               className="h-24 w-24 object-fill rounded-full border-4 border-transparent"
                           />
                           <span className="flex flex-col">
-        <span className="text-xl font-semibold text-[#53484c]">{item.title}</span>
+                                <span className="text-xl font-serif font-semibold text-[#53484c]">{item.title}</span>
 
                               {Array.isArray(item.paragraph) ? (
                                   <PrismicRichText
