@@ -3,6 +3,7 @@ import {
     marginTop,
     paddingBottom,
     paddingTop,
+    numberOfCards,
 } from "@/core/data/SpaceData";
 import {
     Content,
@@ -40,6 +41,14 @@ const CardGridDefault = ({ slice }: CardGridSliceDefaultProps): JSX.Element => {
         paddingTop[slice.primary.padding_top],
         paddingBottom[slice.primary.padding_bottom]
     );
+    const cardContentClasses = clsx(
+        'mb-3',
+        slice.primary.text_center ? 'text-center' : undefined
+      );
+    const gridClasses = clsx(
+        `grid gap-x-8 gap-y-6 min-w-full`,
+        numberOfCards[slice.primary.number_of_colums]
+    );
 
     const sanitizedId = sanitizeTitle(slice.primary.title || "");
 
@@ -51,42 +60,60 @@ const CardGridDefault = ({ slice }: CardGridSliceDefaultProps): JSX.Element => {
             >
                 {slice.primary.title}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 min-w-full">
+            <div className={gridClasses}>
                 {slice.primary.cards.map((card, index) => {
                     const cardContent = (
                         <>
-                            <div className="flex items-start justify-center">
-                                <h2 className="block mt-1 mb-3 text-2xl font-serif font-semibold text-[#53484c] text-center">
-                                    {card.title}
-                                </h2>
-                            </div>
-                            <div className="mb-3 text-center">
-                                <PrismicRichText
-                                    components={{
-                                        ...prismicRichTextDefaults,
-                                    }}
-                                    field={card.paragraph}
-                                />
-                            </div>
-                            <div className="flex justify-center items-end">
-                                {card.link.text && (
-                                    <span className="text-white text-center border bg-[#53484c] hover:bg-slate-50 hover:text-[#53484c] hover:border-[#53484c] py-2 px-4 rounded">
-                                      {card.link.text}
-                                    </span>
-                                )}
+                            <div className="grow">
+                                <div className="flex items-start justify-center">
+                                    <h2 className="block mt-1 mb-3 text-2xl font-serif font-semibold text-[#53484c] text-center">
+                                        {card.title}
+                                    </h2>
+                                </div>
+                                <div className={cardContentClasses}>
+                                    <PrismicRichText
+                                        components={{
+                                            ...prismicRichTextDefaults,
+                                        }}
+                                        field={card.paragraph}
+                                    />
+                                </div>
                             </div>
                         </>
                     );
 
-                    return card.link ? (
-                        <PrismicNextLink
-                            key={index}
-                            field={card.link}
-                            className="bg-white hover:bg-[#F9F6F6] transition-all duration-300 ease-in-out rounded-lg p-6 shadow-md border-solid shadow-[#53484c]/20 transition-shadow border border-transparent block"
-                        >
-                            {cardContent}
-                        </PrismicNextLink>
-                    ) : (
+                    if (card.link?.text?.trim()) {
+                        // Card not clickable, button is the link
+                        return (
+                            <div
+                                key={index}
+                                className="bg-white hover:bg-[#F9F6F6] flex flex-col transition-all duration-300 ease-in-out rounded-lg p-6 shadow-md border-solid shadow-[#53484c]/20 transition-shadow border border-transparent"
+                            >
+                                {cardContent}
+                                <div className="flex justify-center mt-4">
+                                    <PrismicNextLink field={card.link} className="text-white text-center border bg-[#53484c] hover:bg-slate-50 hover:text-[#53484c] hover:border-[#53484c] py-2 px-4 rounded">
+                                        {card.link.text}
+                                    </PrismicNextLink>
+                                </div>
+                            </div>
+                        );
+                    }
+
+                    if (card.link?.url?.trim()) {
+                        // Whole card is clickable (no button)
+                        return (
+                            <PrismicNextLink
+                                key={index}
+                                field={card.link}
+                                className="bg-white hover:bg-[#F9F6F6] transition-all duration-300 ease-in-out rounded-lg p-6 shadow-md border-solid shadow-[#53484c]/20 transition-shadow border border-transparent block"
+                            >
+                                {cardContent}
+                            </PrismicNextLink>
+                        );
+                    }
+
+// No CTA
+                    return (
                         <div
                             key={index}
                             className="bg-white hover:bg-[#F9F6F6] transition-all duration-300 ease-in-out rounded-lg p-6 shadow-md border-solid shadow-[#53484c]/20 transition-shadow border border-transparent"

@@ -3,8 +3,10 @@
 import dynamic from "next/dynamic";
 
 export const components = {
-  children: dynamic(() => import("./Children")),
+  boka: dynamic(() => import("./Boka")),
   card_grid: dynamic(() => import("./CardGrid")),
+  children: dynamic(() => import("./Children")),
+  hafa_samband: dynamic(() => import("./HafaSamband")),
   hero: dynamic(() => import("./Hero")),
   menu_item: dynamic(() => import("./MenuItem")),
   sub_menu_item: dynamic(() => import("./SubMenuItem")),

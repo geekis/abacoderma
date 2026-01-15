@@ -17,6 +17,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "boka": {
+              "type": "SharedSlice"
+            },
+            "hafa_samband": {
+              "type": "SharedSlice"
+            },
             "text_with_image": {
               "type": "SharedSlice"
             },

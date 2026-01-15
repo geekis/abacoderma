@@ -100,6 +100,8 @@ export type LayoutDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<LayoutDocumentData>, "layout", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | BokaSlice
+  | HafaSambandSlice
   | TextWithImageSlice
   | CardGridSlice
   | HeroSlice
@@ -201,6 +203,140 @@ export type SubMenuDocument<Lang extends string = string> =
 export type AllDocumentTypes = LayoutDocument | PageDocument | SubMenuDocument;
 
 /**
+ * Primary content in *Boka → Default → Primary*
+ */
+export interface BokaSliceDefaultPrimary {
+  /**
+   * Title field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: boka.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: boka.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * CTA Text field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: boka.default.primary.cta_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_text: prismic.KeyTextField;
+
+  /**
+   * CTA Link field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: boka.default.primary.cta_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Margin top field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: boka.default.primary.margin_top
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  margin_top: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Margin Bottom field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: boka.default.primary.margin_bottom
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  margin_bottom: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Padding Top field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: boka.default.primary.padding_top
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding_top: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Padding Bottom field in *Boka → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: boka.default.primary.padding_bottom
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding_bottom: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for Boka Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BokaSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BokaSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Boka*
+ */
+type BokaSliceVariation = BokaSliceDefault;
+
+/**
+ * Boka Shared Slice
+ *
+ * - **API ID**: `boka`
+ * - **Description**: Boka
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BokaSlice = prismic.SharedSlice<"boka", BokaSliceVariation>;
+
+/**
  * Item in *CardGrid → Default → Primary → Cards*
  */
 export interface CardGridSliceDefaultPrimaryCardsItem {
@@ -275,6 +411,41 @@ export interface CardGridSliceGridStaffPrimaryCardsItem {
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: card_grid.gridStaff.primary.cards[].paragraph
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  paragraph: prismic.RichTextField;
+}
+
+/**
+ * Item in *CardGrid → Boka card → Primary → Cards*
+ */
+export interface CardGridSliceBokaCardPrimaryCardsItem {
+  /**
+   * Title field in *CardGrid → Boka card → Primary → Cards*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_grid.bokaCard.primary.cards[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Link field in *CardGrid → Boka card → Primary → Cards*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_grid.bokaCard.primary.cards[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Paragraph field in *CardGrid → Boka card → Primary → Cards*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_grid.bokaCard.primary.cards[].paragraph
    * - **Documentation**: https://prismic.io/docs/fields/rich-text
    */
   paragraph: prismic.RichTextField;
@@ -359,6 +530,28 @@ export interface CardGridSliceDefaultPrimary {
     "none" | "small" | "medium" | "large",
     "filled"
   >;
+
+  /**
+   * Text Center field in *CardGrid → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: card_grid.default.primary.text_center
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  text_center: prismic.BooleanField;
+
+  /**
+   * Number of colums field in *CardGrid → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: two
+   * - **API ID Path**: card_grid.default.primary.number_of_colums
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  number_of_colums: prismic.SelectField<"two" | "three" | "four", "filled">;
 }
 
 /**
@@ -469,9 +662,106 @@ export type CardGridSliceGridStaff = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *CardGrid → Boka card → Primary*
+ */
+export interface CardGridSliceBokaCardPrimary {
+  /**
+   * Title field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_grid.bokaCard.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Cards field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: card_grid.bokaCard.primary.cards[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  cards: prismic.GroupField<Simplify<CardGridSliceBokaCardPrimaryCardsItem>>;
+
+  /**
+   * Margin top field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: card_grid.bokaCard.primary.margin_top
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  margin_top: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Margin Bottom field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: card_grid.bokaCard.primary.margin_bottom
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  margin_bottom: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Padding Top field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: card_grid.bokaCard.primary.padding_top
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding_top: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+
+  /**
+   * Padding Bottom field in *CardGrid → Boka card → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: card_grid.bokaCard.primary.padding_bottom
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  padding_bottom: prismic.SelectField<
+    "none" | "small" | "medium" | "large",
+    "filled"
+  >;
+}
+
+/**
+ * Boka card variation for CardGrid Slice
+ *
+ * - **API ID**: `bokaCard`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CardGridSliceBokaCard = prismic.SharedSliceVariation<
+  "bokaCard",
+  Simplify<CardGridSliceBokaCardPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *CardGrid*
  */
-type CardGridSliceVariation = CardGridSliceDefault | CardGridSliceGridStaff;
+type CardGridSliceVariation =
+  | CardGridSliceDefault
+  | CardGridSliceGridStaff
+  | CardGridSliceBokaCard;
 
 /**
  * CardGrid Shared Slice
@@ -513,6 +803,51 @@ type ChildrenSliceVariation = ChildrenSliceDefault;
 export type ChildrenSlice = prismic.SharedSlice<
   "children",
   ChildrenSliceVariation
+>;
+
+/**
+ * Primary content in *HafaSamband → Default → Primary*
+ */
+export interface HafaSambandSliceDefaultPrimary {
+  /**
+   * Title field in *HafaSamband → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hafa_samband.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for HafaSamband Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HafaSambandSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HafaSambandSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *HafaSamband*
+ */
+type HafaSambandSliceVariation = HafaSambandSliceDefault;
+
+/**
+ * HafaSamband Shared Slice
+ *
+ * - **API ID**: `hafa_samband`
+ * - **Description**: HafaSamband
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HafaSambandSlice = prismic.SharedSlice<
+  "hafa_samband",
+  HafaSambandSliceVariation
 >;
 
 /**
@@ -1028,17 +1363,28 @@ declare module "@prismicio/client" {
       SubMenuDocumentData,
       SubMenuDocumentDataSlicesSlice,
       AllDocumentTypes,
+      BokaSlice,
+      BokaSliceDefaultPrimary,
+      BokaSliceVariation,
+      BokaSliceDefault,
       CardGridSlice,
       CardGridSliceDefaultPrimaryCardsItem,
       CardGridSliceDefaultPrimary,
       CardGridSliceGridStaffPrimaryCardsItem,
       CardGridSliceGridStaffPrimary,
+      CardGridSliceBokaCardPrimaryCardsItem,
+      CardGridSliceBokaCardPrimary,
       CardGridSliceVariation,
       CardGridSliceDefault,
       CardGridSliceGridStaff,
+      CardGridSliceBokaCard,
       ChildrenSlice,
       ChildrenSliceVariation,
       ChildrenSliceDefault,
+      HafaSambandSlice,
+      HafaSambandSliceDefaultPrimary,
+      HafaSambandSliceVariation,
+      HafaSambandSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,

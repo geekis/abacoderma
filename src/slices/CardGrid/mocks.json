@@ -71,6 +71,15 @@
 				"__TYPE__": "FieldContent",
 				"value": "none",
 				"type": "Select"
+			},
+			"text_center": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"number_of_colums": {
+				"__TYPE__": "FieldContent",
+				"value": "three",
+				"type": "Select"
 			}
 		},
 		"items": []
@@ -172,6 +181,87 @@
 			"padding_bottom": {
 				"__TYPE__": "FieldContent",
 				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "bokaCard",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "enjoy",
+				"type": "Text"
+			},
+			"cards": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "off",
+									"type": "Text"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "efd706a6-8580-4562-b29e-2edf6c6349ae",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "me"
+									}
+								}
+							],
+							[
+								"paragraph",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Tempor ut voluptate dolore ut ullamco laborum."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"margin_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"margin_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_top": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"padding_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "small",
 				"type": "Select"
 			}
 		},

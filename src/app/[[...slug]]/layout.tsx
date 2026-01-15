@@ -44,7 +44,7 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 
 					{/* Right: actions (desktop) */}
 					<div className="hidden md:flex gap-4 items-center">
-						<a className="text-gray-800 text-lg hover:text-gray-600" href="mailto:abacoderma@abacoderma.is">
+						<a className="text-gray-800 text-lg hover:text-gray-600" href="/hafa-samband">
 							Hafa samband
 						</a>
 						<a
@@ -72,7 +72,7 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 								</ul>
 
 								<div className="mt-4 flex flex-col gap-3 border-t border-gray-200 pt-4">
-									<a className="text-gray-800 text-lg hover:text-gray-600" href="mailto:abacoderma@abacoderma.is">
+									<a className="text-gray-800 text-lg hover:text-gray-600" href="/hafa-samband">
 										Hafa samband
 									</a>
 									<a

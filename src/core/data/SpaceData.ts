@@ -25,3 +25,9 @@ export const marginBottom = {
 	medium: 'lg:mb-[80px] md:mb-[60px] sm:mb-[40px] mb-[40px]',
 	small: 'lg:mb-[40px] md:mb-[20px] sm:mb-[20px] mb-[20px]',
 };
+
+export const numberOfCards = {
+	two: 'grid-cols-2 md:grid-cols-2 lg:grid-cols-2',
+	three: 'grid-cols-3 md:grid-cols-3 lg:grid-cols-3',
+	four: 'grid-cols-4 md:grid-cols-4 lg:grid-cols-4',
+}
