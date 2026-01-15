@@ -15,6 +15,7 @@ import {
 import { PrismicNextLink } from "@prismicio/next";
 import {PrismicRichText, PrismicText, PrismicTextProps} from "@prismicio/react";
 import clsx from "clsx";
+import { isFilled } from "@prismicio/client"; // or "@prismicio/helpers" in older setups
 import React, { JSX } from "react";
 
 import {prismicRichTextDefaults} from '../../../../../components/_shared/prismicRichTextDefaults';
@@ -98,8 +99,7 @@ const CardGridDefault = ({ slice }: CardGridSliceDefaultProps): JSX.Element => {
                             </div>
                         );
                     }
-
-                    if (card.link?.url?.trim()) {
+                    if (isFilled.link(card.link)) {
                         // Whole card is clickable (no button)
                         return (
                             <PrismicNextLink
