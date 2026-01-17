@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).send("Method Not Allowed");
     }
 
-    const { name, email, message, kennitala, kennitalaF, simi } = req.body;
+    const { name, email, message, simi } = req.body;
 
     if (!name || !email || !simi || !kennitala || !message) {
         return res.status(400).json({ error: "Missing fields" });
@@ -25,14 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await transporter.sendMail({
             from: `"${name}" <${email}>`,
             to: process.env.EMAIL_TO,
-            subject: `Skráning á biðlista - ${name}`,
+            subject: `Hafa samband - ${name}`,
             html: `
 				<p><strong>Nafn:</strong> ${name}</p>
-				<p><strong>Kennitala:</strong> ${kennitala}</p>
-				${kennitalaF
-                ? `<p><strong>Kennitala forráðamanns:</strong> ${kennitalaF}</p>`
-                : ""
-            }
 				<p><strong>Netfang:</strong> ${email}</p>
 				<p><strong>Símanúmer:</strong> ${simi}</p>
 				<p><strong>Skilaboð:</strong><br/>${message}</p>
@@ -40,13 +35,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         await transporter.sendMail({
-            from: `"Skjúkraþjálfun Akureyrar" <${process.env.EMAIL_FROM}>`,
+            from: `"AbacoDerma" <${process.env.EMAIL_FROM}>`,
             to: `"${email}"`,
-            subject: `Skráning móttekin - Sjúkraþjálfun Akureyrar`,
+            subject: `Takk fyrir að hafa samband`,
             html: `
-				<p>Takk fyrir skráninguna ${name}</p>
-				<p>Við munum hafa sambandi við þig...</p>
-				<p>Kær kveðja Sjúkraþjálfun Akureyrar</p>
+				<p>Takk fyrir skilaboðin ${name}</p>
+				<p>Við munum hafa sambandi.</p>
+				<p>Kær kveðja Abaco Derma</p>
 			`,
         });
 

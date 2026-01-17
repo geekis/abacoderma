@@ -35,7 +35,7 @@ export default function RootLayout({
           <link rel="manifest" href="/favicon/site.webmanifest"/>
       </head>
       <body
-          className={`${libreBaskerville.variable} ${geistMono.variable} antialiased max-w-7xl mx-3 2xl:m-auto`}
+          className={`${libreBaskerville.variable} ${geistMono.variable} antialiased max-w-7xl mx-3 lg:m-auto`}
       >
       {children}
       </body>

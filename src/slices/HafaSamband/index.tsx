@@ -16,7 +16,7 @@ export type HafaSambandProps = SliceComponentProps<Content.HafaSambandSlice>;
  * Component for "Skraningar" Slices.
  */
 const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
-  const [form, setForm] = useState({ name: "", kennitala:"", kennitalaF:"", simi:"", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", simi:"", email: "", message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,8 +31,8 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
       body: JSON.stringify(form),
     });
     if (res.ok) {
-      toast.success("Skráning móttekin");
-      setForm({ name: "", kennitala: "", kennitalaF:"", simi:"", email: "", message: "" });
+      toast.success("Takk fyrir að hafa samband! Við munum hafa samband við þig sem fyrst.");
+      setForm({ name: "", kennitala: "", simi:"", email: "", message: "" });
     } else {
       toast.error("Villa kom upp við skráningu");
     }
@@ -55,11 +55,11 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
               <input name="simi" value={form.simi} onChange={handleChange} type="text" placeholder="Sími"
                      className="w-full border rounded-xl px-4 py-2 text-lg"/>
             </label>
-            <label className="text-md mb-2">Lýsing á vandamáli/ ástæðu komu
+            <label className="text-md mb-2">Skilaboð
               <textarea name="message" value={form.message} onChange={handleChange} placeholder=""
                         className="w-full border rounded-xl px-4 py-2 text-lg"/>
             </label>
-            <button type="submit" className="bg-[#53484c] font-sans text-white font-['poppins'] rounded py-2 px-5 text-lg">Sendu
+            <button type="submit" className="bg-[#53484c] font-sans text-white font-['poppins'] rounded py-2 px-5 text-lg">Senda
             </button>
           </div>
 

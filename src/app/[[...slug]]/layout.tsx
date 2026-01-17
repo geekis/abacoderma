@@ -91,16 +91,27 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 			<main>{children}</main>
 
 			<footer className="grid grid-cols-12 gap-4 rounded-2xl bg-[#53484c] mb-8 bg-cover bg-center min-h-64 mt-6">
-				<div className="mt-10 col-start-2 col-span-5">
-					<h1 className="text-gray-50 text-3xl">Abaco|Derma</h1>
+				<div className="mt-10 col-start-2 col-span-3">
+					<h2 className="text-gray-50 text-3xl font-serif font-bold">Abaco|Derma</h2>
 					<ul className="text-gray-50 mt-4">
 						<li>Hrísalundi 1a</li>
 						<li>600 Akureyri</li>
 						<li>Sími: 462-3200</li>
+						<li><a href="mailto:abacoderma@abacoderma.is">abacoderma@abacoderma.is</a></li>
 					</ul>
 				</div>
+				<div className="mt-10 text-gray-50 text-3xl col-span-3 font-serif font-bold flex flex-1">
+					<a href="https://www.facebook.com">F</a>
+					<a href="https://www.instagram.com">I</a>
+				</div>
+				<div className="mt-10 col-span-3">
+					<h2 className="text-gray-50 text-3xl font-serif font-bold">Skráning á póstlista</h2>
+						<input name="email" value="email" type="text" placeholder="Tölfupóstfang"
+							   className="w-full border rounded-xl bg-white mt-4 px-4 py-2 text-lg"/>
+				</div>
 
-				<SliceZone slices={footerSlices} components={components} />
+
+				<SliceZone slices={footerSlices} components={components}/>
 			</footer>
 		</>
 	);
