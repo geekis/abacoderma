@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { name, email, message, simi } = req.body;
 
-    if (!name || !email || !simi || !kennitala || !message) {
+    if (!name || !email || !simi || !message) {
         return res.status(400).json({ error: "Missing fields" });
     }
 

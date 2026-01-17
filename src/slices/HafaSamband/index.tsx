@@ -32,7 +32,7 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
     });
     if (res.ok) {
       toast.success("Takk fyrir að hafa samband! Við munum hafa samband við þig sem fyrst.");
-      setForm({ name: "", kennitala: "", simi:"", email: "", message: "" });
+      setForm({ name: "", simi:"", email: "", message: "" });
     } else {
       toast.error("Villa kom upp við skráningu");
     }
