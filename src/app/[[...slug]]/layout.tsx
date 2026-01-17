@@ -6,6 +6,7 @@ import { SliceZone } from "@prismicio/react";
 import { createClient, repositoryName } from "@/prismicio";
 import { components } from "@/slices";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram } from "react-icons/fa"; // add near top imports
 
 export default async function PrismicLayout({ children }: { children: React.ReactNode }) {
 	const client = createClient();
@@ -90,8 +91,8 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 
 			<main>{children}</main>
 
-			<footer className="grid grid-cols-12 gap-4 rounded-2xl bg-[#53484c] mb-8 bg-cover bg-center min-h-64 mt-6">
-				<div className="mt-10 col-start-2 col-span-3">
+			<footer className="grid grid-cols-12 gap-4 rounded-2xl bg-[#53484c] mb-8 p-8 bg-cover bg-center min-h-32 mt-6">
+				<div className="col-span-12 md:col-span-3">
 					<h2 className="text-gray-50 text-3xl font-serif font-bold">Abaco|Derma</h2>
 					<ul className="text-gray-50 mt-4">
 						<li>Hrísalundi 1a</li>
@@ -100,14 +101,26 @@ export default async function PrismicLayout({ children }: { children: React.Reac
 						<li><a href="mailto:abacoderma@abacoderma.is">abacoderma@abacoderma.is</a></li>
 					</ul>
 				</div>
-				<div className="mt-10 text-gray-50 text-3xl col-span-3 font-serif font-bold flex flex-1">
-					<a href="https://www.facebook.com">F</a>
-					<a href="https://www.instagram.com">I</a>
+				<div className="col-span-12 md:col-span-3">
+					<h2 className="text-gray-50 text-3xl font-serif font-bold">Opnunartími</h2>
+					<ul className="text-gray-50 mt-4">
+						<li>Mánud. - föstd 10:00 - 18:00</li>
+						<li>Laugardag 11:00 - 15:00</li>
+						<li>Lokað sunnudaga</li>
+					</ul>
 				</div>
-				<div className="mt-10 col-span-3">
-					<h2 className="text-gray-50 text-3xl font-serif font-bold">Skráning á póstlista</h2>
-						<input name="email" value="email" type="text" placeholder="Tölfupóstfang"
-							   className="w-full border rounded-xl bg-white mt-4 px-4 py-2 text-lg"/>
+				<div className="text-gray-50 text-3xl col-span-12 md:col-span-3 font-serif font-bold flex grow-0 items-start">
+					<a href="https://www.facebook.com/abacoheilsulind"
+					   className="text-gray-50 hover:text-gray-300 p-2 rounded-full bg-black/50 hover:bg-black/30"
+					><FaFacebookF/></a>
+					<a href="https://www.instagram.com/abacoderma/"
+					   className="text-gray-50 hover:text-gray-300 p-2 rounded-full bg-black/50 hover:bg-black/30 ml-4"
+					><FaInstagram/></a>
+				</div>
+				<div className="col-span-12 md:col-span-3 hidden">
+					<h2 className="text-gray-50 text-2xl font-serif font-bold">Skráning á póstlista</h2>
+					<input name="email" value="" type="text" disabled placeholder="Tölfupóstfang"
+						   className="w-full border rounded-xl bg-white mt-4 px-4 py-2 text-lg"/>
 				</div>
 
 
