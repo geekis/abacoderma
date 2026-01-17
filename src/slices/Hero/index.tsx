@@ -28,7 +28,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
 
     >
       <div className="grid gap-4 col-start-2 col-span-5 self-center">
-        <h1 className="font-serif text-slate-50 text-5xl">{slice.primary.title}</h1>
+        <h1 className="font-serif text-slate-50 text-3xl md:text-5xl">{slice.primary.title}</h1>
         <p className="text-slate-50">{slice.primary.text}</p>
 
         {isFilled.link(slice.primary.url) && (
