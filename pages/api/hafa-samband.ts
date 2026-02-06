@@ -34,7 +34,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
             auth: {
                 user: EMAIL_FROM,
                 pass: EMAIL_PASS,
@@ -71,9 +73,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(200).json({ success: true });
     } catch (error: any) {
         console.error("Email error details:", error);
+        
+        let errorMessage = "Email failed to send";
+        let errorDetails = error?.message || "Unknown error";
+
+        if (errorDetails.includes("535") || errorDetails.includes("Invalid login")) {
+            errorMessage = "Innskráning mistókst (Gmail Login Failed)";
+            errorDetails = "Gmail hafnaði notandanafni eða lykilorði. Gakktu úr skugga um að þú sért að nota 'App Password' en ekki venjulega lykilorðið þitt.";
+        }
+
         res.status(500).json({ 
-            error: "Email failed to send", 
-            details: error?.message || "Unknown error" 
+            error: errorMessage, 
+            details: errorDetails 
         });
     }
 }
