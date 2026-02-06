@@ -33,6 +33,9 @@ export default function RootLayout({
           <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
           <meta name="apple-mobile-web-app-title" content="AbacoDerma"/>
           <link rel="manifest" href="/favicon/site.webmanifest"/>
+
+          <script src="https://cdn.usefathom.com/script.js" data-site="YUSNIMHU" defer></script>
+
       </head>
       <body
           className={`${libreBaskerville.variable} ${geistMono.variable} antialiased max-w-7xl mx-3 lg:m-auto`}
