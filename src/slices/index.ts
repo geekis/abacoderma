@@ -8,6 +8,7 @@ export const components = {
   children: dynamic(() => import("./Children")),
   hafa_samband: dynamic(() => import("./HafaSamband")),
   hero: dynamic(() => import("./Hero")),
+  mailchimp_signup: dynamic(() => import("./MailchimpSignup")),
   menu_item: dynamic(() => import("./MenuItem")),
   sub_menu_item: dynamic(() => import("./SubMenuItem")),
   text: dynamic(() => import("./Text")),

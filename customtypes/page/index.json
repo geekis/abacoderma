@@ -17,6 +17,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "mailchimp_signup": {
+              "type": "SharedSlice"
+            },
             "boka": {
               "type": "SharedSlice"
             },

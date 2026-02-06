@@ -7,11 +7,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).send("Method Not Allowed");
     }
 
-    const { name, email, message, simi } = req.body;
+    const { firstName, lastName, email, message, simi } = req.body;
 
-    if (!name || !email || !simi || !message) {
+    if (!firstName || !lastName || !email || !simi || !message) {
         return res.status(400).json({ error: "Missing fields" });
     }
+
+    const name = `${firstName} ${lastName}`;
 
     try {
         const transporter = nodemailer.createTransport({

@@ -100,6 +100,7 @@ export type LayoutDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<LayoutDocumentData>, "layout", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | MailchimpSignupSlice
   | BokaSlice
   | HafaSambandSlice
   | TextWithImageSlice
@@ -929,6 +930,71 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *MailchimpSignup → Default → Primary*
+ */
+export interface MailchimpSignupSliceDefaultPrimary {
+  /**
+   * Title field in *MailchimpSignup → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Skráðu þig á póstlistann
+   * - **API ID Path**: mailchimp_signup.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *MailchimpSignup → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: mailchimp_signup.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button Text field in *MailchimpSignup → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Skrá mig
+   * - **API ID Path**: mailchimp_signup.default.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button_text: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for MailchimpSignup Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MailchimpSignupSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MailchimpSignupSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MailchimpSignup*
+ */
+type MailchimpSignupSliceVariation = MailchimpSignupSliceDefault;
+
+/**
+ * MailchimpSignup Shared Slice
+ *
+ * - **API ID**: `mailchimp_signup`
+ * - **Description**: MailchimpSignup
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type MailchimpSignupSlice = prismic.SharedSlice<
+  "mailchimp_signup",
+  MailchimpSignupSliceVariation
+>;
+
+/**
  * Primary content in *MenuItem → Default → Primary*
  */
 export interface MenuItemSliceDefaultPrimary {
@@ -1389,6 +1455,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      MailchimpSignupSlice,
+      MailchimpSignupSliceDefaultPrimary,
+      MailchimpSignupSliceVariation,
+      MailchimpSignupSliceDefault,
       MenuItemSlice,
       MenuItemSliceDefaultPrimary,
       MenuItemSliceWithSubMenuPrimary,

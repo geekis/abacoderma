@@ -16,7 +16,7 @@ export type HafaSambandProps = SliceComponentProps<Content.HafaSambandSlice>;
  * Component for "Skraningar" Slices.
  */
 const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
-  const [form, setForm] = useState({ name: "", simi:"", email: "", message: "" });
+  const [form, setForm] = useState({ firstName: "", lastName: "", simi:"", email: "", message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -32,7 +32,7 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
     });
     if (res.ok) {
       toast.success("Takk fyrir að hafa samband! Við munum hafa samband við þig sem fyrst.");
-      setForm({ name: "", simi:"", email: "", message: "" });
+      setForm({ firstName: "", lastName: "", simi:"", email: "", message: "" });
     } else {
       toast.error("Villa kom upp við skráningu");
     }
@@ -43,10 +43,16 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
         <h3 className="w-full text-[#53484c] text-4xl font-serif font-bold text-center mb-8">{slice.primary.title}</h3>
         <form onSubmit={handleSubmit}>
           <div className="max-w-[400px] flex flex-col gap-2 mt-4 mx-auto">
-            <label className="text-md mb-2">Nafn
-              <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Nafn"
-                     className="w-full border rounded-xl px-4 py-2 text-lg"/>
-            </label>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <label className="text-md mb-2 flex-1">Fornafn
+                <input name="firstName" value={form.firstName} onChange={handleChange} type="text" placeholder="Fornafn"
+                       className="w-full border rounded-xl px-4 py-2 text-lg"/>
+              </label>
+              <label className="text-md mb-2 flex-1">Eftirnafn
+                <input name="lastName" value={form.lastName} onChange={handleChange} type="text" placeholder="Eftirnafn"
+                       className="w-full border rounded-xl px-4 py-2 text-lg"/>
+              </label>
+            </div>
             <label className="text-md mb-2">Netfang
               <input name="email" value={form.email} onChange={handleChange} type="email" placeholder="Netfang"
                      className="w-full border rounded-xl px-4 py-2 text-lg"/>
