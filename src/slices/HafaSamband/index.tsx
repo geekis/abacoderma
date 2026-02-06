@@ -34,7 +34,10 @@ const HafaSamband: FC<HafaSambandProps> = ({ slice }) => {
       toast.success("Takk fyrir að hafa samband! Við munum hafa samband við þig sem fyrst.");
       setForm({ firstName: "", lastName: "", simi:"", email: "", message: "" });
     } else {
-      toast.error("Villa kom upp við skráningu");
+      const data = await res.json().catch(() => ({}));
+      const errorMsg = data.details || data.error || "Villa kom upp við skráningu";
+      toast.error(errorMsg);
+      console.error("Form submission error:", data);
     }
   };
 

@@ -16,17 +16,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const name = `${firstName} ${lastName}`;
 
     try {
+        console.log("Starting email process...");
+        const EMAIL_FROM = process.env.EMAIL_FROM;
+        const EMAIL_TO = process.env.EMAIL_TO;
+        const EMAIL_PASS = process.env.EMAIL_PASS;
+
+        console.log("EMAIL_FROM:", EMAIL_FROM);
+        console.log("EMAIL_TO:", EMAIL_TO);
+        console.log("EMAIL_PASS set:", !!EMAIL_PASS);
+
+        if (!EMAIL_FROM || !EMAIL_PASS || !EMAIL_TO) {
+            console.error("Missing environment variables");
+            return res.status(500).json({ 
+                error: "Vantar stillingar fyrir tölvupóst (Environment variables)",
+                details: `Missing: ${[!EMAIL_FROM && "EMAIL_FROM", !EMAIL_PASS && "EMAIL_PASS", !EMAIL_TO && "EMAIL_TO"].filter(Boolean).join(", ")}`
+            });
+        }
+
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: process.env.EMAIL_FROM,
-                pass: process.env.EMAIL_PASS,
+                user: EMAIL_FROM,
+                pass: EMAIL_PASS,
             },
         });
 
+        console.log("Sending main email to admin...");
         await transporter.sendMail({
-            from: `"${name}" <${email}>`,
-            to: process.env.EMAIL_TO,
+            from: `"${name}" <${EMAIL_FROM}>`, // Use EMAIL_FROM as sender for Gmail
+            replyTo: email, // Set user email as reply-to
+            to: EMAIL_TO,
             subject: `Hafa samband - ${name}`,
             html: `
 				<p><strong>Nafn:</strong> ${name}</p>
@@ -36,9 +55,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			`,
         });
 
+        console.log("Sending confirmation email to user...");
         await transporter.sendMail({
-            from: `"AbacoDerma" <${process.env.EMAIL_FROM}>`,
-            to: `"${email}"`,
+            from: `"AbacoDerma" <${EMAIL_FROM}>`,
+            to: email,
             subject: `Takk fyrir að hafa samband`,
             html: `
 				<p>Takk fyrir skilaboðin ${name}</p>
@@ -47,9 +67,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			`,
         });
 
+        console.log("Emails sent successfully!");
         res.status(200).json({ success: true });
-    } catch (error) {
-        console.error("Email error:", error);
-        res.status(500).json({ error: "Email failed to send" });
+    } catch (error: any) {
+        console.error("Email error details:", error);
+        res.status(500).json({ 
+            error: "Email failed to send", 
+            details: error?.message || "Unknown error" 
+        });
     }
 }
