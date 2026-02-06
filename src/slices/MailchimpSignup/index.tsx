@@ -60,9 +60,6 @@ const MailchimpSignup: FC<MailchimpSignupProps> = ({ slice }) => {
             <PrismicRichText field={slice.primary.description} />
           </div>
         )}
-        <div class={""}>
-
-        </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 justify-center items-center">
           <input
             type="text"
